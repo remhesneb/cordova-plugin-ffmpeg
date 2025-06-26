@@ -40,13 +40,13 @@
     <header-file src="src/ios/HWPFFMpeg.h" target-dir="FFMpegPlugin"/>
     <source-file src="src/ios/HWPFFMpeg.m" target-dir="FFMpegPlugin"/>
     <!-- ffmpeg kit framework for ios using cocoapods -->
-    <framework src="libs/ffmpeg-kit-ios-full-gpl/ffmpegkit.xcframework" custom="true" embed="true" />
-    <framework src="libs/ffmpeg-kit-ios-full-gpl/libavcodec.xcframework" custom="true" embed="true" />
-    <framework src="libs/ffmpeg-kit-ios-full-gpl/libavdevice.xcframework" custom="true" embed="true" />
-    <framework src="libs/ffmpeg-kit-ios-full-gpl/libavfilter.xcframework" custom="true" embed="true" />
-    <framework src="libs/ffmpeg-kit-ios-full-gpl/libavformat.xcframework" custom="true" embed="true" />
-    <framework src="libs/ffmpeg-kit-ios-full-gpl/libavutil.xcframework" custom="true" embed="true" />
-    <framework src="libs/ffmpeg-kit-ios-full-gpl/libswresample.xcframework" custom="true" embed="true" />
-    <framework src="libs/ffmpeg-kit-ios-full-gpl/libswscale.xcframework" custom="true" embed="true" />
+    <podspec>
+      <config>
+        <source url="https://cdn.cocoapods.org/"/>
+      </config>
+      <pods use-frameworks="true">
+        <pod name="ffmpeg-kit-ios-full-gpl" spec="~> 4.5.1" />
+      </pods>
+    </podspec>
   </platform>
 </plugin>
