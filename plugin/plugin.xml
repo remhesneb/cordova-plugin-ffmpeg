@@ -45,7 +45,7 @@
         <source url="https://cdn.cocoapods.org/"/>
       </config>
       <pods use-frameworks="true">
-        <pod name="ffmpeg-kit-ios-full-gpl" spec="https://raw.githubusercontent.com/remhesneb/cordova-plugin-ffmpeg/refs/heads/master/cacaopods/ffmpeg-kit-ios-full-gpl.podspec.json" />
+        <pod name="ffmpeg-kit-ios-full-gpl" spec="https://raw.githubusercontent.com/remhesneb/cordova-plugin-ffmpeg/refs/heads/master/cacaopods/ffmpeg-kit-ios-full-gpl.podspec" />
       </pods>
     </podspec>
   </platform>
