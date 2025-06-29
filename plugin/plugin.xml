@@ -39,14 +39,15 @@
 
     <header-file src="src/ios/HWPFFMpeg.h" target-dir="FFMpegPlugin"/>
     <source-file src="src/ios/HWPFFMpeg.m" target-dir="FFMpegPlugin"/>
-    <!-- ffmpeg kit framework for ios using cocoapods -->
+
     <podspec>
       <config>
         <source url="https://cdn.cocoapods.org/"/>
       </config>
       <pods use-frameworks="true">
-        <pod name="ffmpeg-kit-ios-full-gpl" spec="https://raw.githubusercontent.com/remhesneb/cordova-plugin-ffmpeg/refs/heads/master/cacaopods/ffmpeg-kit-ios-full-gpl.podspec" />
+        <pod name="ffmpeg-kit-ios-full-gpl" git="git@github.com:remhesneb/cordova-plugin-ffmpeg.git" branch="master" configurations="Debug,Release" />
       </pods>
     </podspec>
+
   </platform>
 </plugin>

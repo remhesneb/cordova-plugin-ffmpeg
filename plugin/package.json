@@ -1,6 +1,6 @@
 {
   "name": "remhesneb-cordova-plugin-ffmpeg",
-  "version": "2.0.4",
+  "version": "2.0.16",
   "description": "Cordova FFMPEG plugin with ffmpeg kit",
   "cordova": {
     "id": "cordova-plugin-ffmpeg",
