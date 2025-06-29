@@ -1,6 +1,6 @@
 {
   "name": "remhesneb-cordova-plugin-ffmpeg",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": "Cordova FFMPEG plugin with ffmpeg kit",
   "cordova": {
     "id": "cordova-plugin-ffmpeg",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MaximBelov/cordova-plugin-ffmpeg.git"
+    "url": "git+https://github.com/remhesneb/cordova-plugin-ffmpeg.git"
   },
   "keywords": [
     "cordova",
@@ -21,10 +21,10 @@
     "cordova-android",
     "cordova-ios"
   ],
-  "author": "Marin Bivol",
+  "author": "Benjamin Sehmer",
   "license": "Apache-2",
   "bugs": {
-    "url": "https://github.com/MaximBelov/cordova-plugin-ffmpeg/issues"
+    "url": "https://github.com/remhesneb/cordova-plugin-ffmpeg/issues"
   },
-  "homepage": "https://github.com/MaximBelov/cordova-plugin-ffmpeg#readme"
+  "homepage": "https://github.com/remhesneb/cordova-plugin-ffmpeg#readme"
 }
