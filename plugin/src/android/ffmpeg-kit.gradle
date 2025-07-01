@@ -20,6 +20,24 @@ task downloadFfmpegKit {
 
 preBuild.dependsOn downloadFfmpegKit
 
+def aarPaths = [
+        "$rootDir/libs/ffmpeg-kit-full-gpl.aar",
+        "$rootDir/app/libs/ffmpeg-kit-full-gpl.aar",
+        "$rootDir/capacitor-cordova-android-plugins/src/main/libs/ffmpeg-kit-full-gpl.aar"
+]
+task copyAarEverywhere {
+    doLast {
+        aarPaths.each { path ->
+            def file = new File(path)
+            file.parentFile.mkdirs()
+            new File("$rootDir/libs/ffmpeg-kit-full-gpl.aar").withInputStream { i ->
+                file.withOutputStream { it << i }
+            }
+        }
+    }
+}
+preBuild.dependsOn copyAarEverywhere
+
 repositories {
     flatDir {
         dirs "$rootDir/libs", "$rootDir/app/libs", "$rootDir/capacitor-cordova-android-plugins/src/main/libs"
