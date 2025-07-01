@@ -14,6 +14,7 @@ task downloadFfmpegKit {
         } else {
             println "ffmpeg-kit-full-gpl.aar existiert bereits unter $aarTarget"
         }
+        println aarTarget.absolutePath + " exists: " + aarTarget.exists()
     }
 }
 
