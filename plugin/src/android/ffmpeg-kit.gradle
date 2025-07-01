@@ -1,3 +1,31 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'de.undercouch:gradle-download-task:5.6.0'
+    }
+}
+apply plugin: 'de.undercouch.download'
+
+def ffmpegKitUrl = 'https://github.com/NooruddinLakhani/ffmpeg-kit-full-gpl/releases/download/v1.0.0/ffmpeg-kit-full-gpl.aar'
+def aarTarget = file("$rootDir/libs/ffmpeg-kit-full-gpl.aar")
+
+task downloadFfmpegKit(type: de.undercouch.gradle.tasks.download.Download) {
+    src ffmpegKitUrl
+    dest aarTarget
+    onlyIfNewer true
+    doLast {
+        println "ffmpeg-kit-full-gpl.aar wurde heruntergeladen nach: $aarTarget"
+    }
+}
+
+assemble.dependsOn(downloadFfmpegKit)
+
+repositories {
+    flatDir { dirs 'libs' }
+}
+
 dependencies {
-    implementation 'com.arthenica:ffmpeg-kit-full-gpl:4.5.1-1.LTS'
+    implementation(name: 'ffmpeg-kit-full-gpl', ext: 'aar')
 }
