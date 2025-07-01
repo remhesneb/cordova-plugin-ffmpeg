@@ -1,5 +1,5 @@
 def aarUrl = 'https://github.com/NooruddinLakhani/ffmpeg-kit-full-gpl/releases/download/v1.0.0/ffmpeg-kit-full-gpl.aar'
-def aarTarget = file("$rootDir/libs/ffmpeg-kit-full-gpl.aar")
+def aarTarget = file("$rootDir/capacitor-cordova-android-plugins/src/main/libs/ffmpeg-kit-full-gpl.aar")
 
 task downloadFfmpegKit {
     outputs.file aarTarget
