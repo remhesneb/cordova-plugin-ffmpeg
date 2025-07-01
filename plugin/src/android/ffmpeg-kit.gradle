@@ -21,7 +21,9 @@ task downloadFfmpegKit {
 preBuild.dependsOn downloadFfmpegKit
 
 repositories {
-    flatDir { dirs 'libs' }
+    flatDir {
+        dirs "$rootDir/libs", "$rootDir/app/libs", "$rootDir/capacitor-cordova-android-plugins/src/main/libs"
+    }
 }
 
 dependencies {
