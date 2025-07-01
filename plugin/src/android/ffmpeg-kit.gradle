@@ -1,47 +1,33 @@
-def aarUrl = 'https://github.com/NooruddinLakhani/ffmpeg-kit-full-gpl/releases/download/v1.0.0/ffmpeg-kit-full-gpl.aar'
-def aarTarget = file("$rootDir/libs/ffmpeg-kit-full-gpl.aar")
+// Add the following script to download the file from the cloud
+afterEvaluate {
+    def aarUrl = 'https://github.com/NooruddinLakhani/ffmpeg-kit-full-gpl/releases/download/v1.0.0/ffmpeg-kit-full-gpl.aar'
+    def aarFile = file("${rootDir}/libs/ffmpeg-kit-full-gpl.aar")
 
-def aarPaths = [
-        "$rootDir/libs/ffmpeg-kit-full-gpl.aar",
-        "$rootDir/app/libs/ffmpeg-kit-full-gpl.aar",
-        "$rootDir/capacitor-cordova-android-plugins/src/main/libs/ffmpeg-kit-full-gpl.aar"
-]
-
-task downloadFfmpegKit {
-    outputs.file aarTarget
-    doLast {
-        if (!aarTarget.exists()) {
-            println "Lade ffmpeg-kit-full-gpl.aar aus $aarUrl ..."
-            aarTarget.parentFile.mkdirs()
-            new URL(aarUrl).withInputStream { i ->
-                aarTarget.withOutputStream { it << i }
+    tasks.register("downloadAar") {
+        doLast {
+            if (!aarFile.parentFile.exists()) {
+                println "📁 Creating directory: ${aarFile.parentFile.absolutePath}"
+                aarFile.parentFile.mkdirs()
             }
-            println "ffmpeg-kit-full-gpl.aar heruntergeladen nach: $aarTarget"
-        } else {
-            println "ffmpeg-kit-full-gpl.aar existiert bereits unter $aarTarget"
-        }
-        println aarTarget.absolutePath + " exists: " + aarTarget.exists()
-    }
-}
-
-task copyAarEverywhere {
-    dependsOn downloadFfmpegKit
-    doLast {
-        aarPaths.each { path ->
-            def file = new File(path)
-            file.parentFile.mkdirs()
-            new File("$rootDir/libs/ffmpeg-kit-full-gpl.aar").withInputStream { i ->
-                file.withOutputStream { it << i }
+            if (!aarFile.exists()) {
+                println "⏬ Downloading AAR from $aarUrl..."
+                new URL(aarUrl).withInputStream { i ->
+                    aarFile.withOutputStream { it << i }
+                }
+                println "✅ AAR downloaded to ${aarFile.absolutePath}"
+            } else {
+                println "ℹ️ AAR already exists at ${aarFile.absolutePath}"
             }
         }
     }
-}
 
-preBuild.dependsOn copyAarEverywhere
+    // Make sure the AAR is downloaded before compilation begins
+    preBuild.dependsOn("downloadAar")
+}
 
 repositories {
     flatDir {
-        dirs "$rootDir/libs", "$rootDir/app/libs", "$rootDir/capacitor-cordova-android-plugins/src/main/libs"
+        dirs "$rootDir/libs"
     }
 }
 
