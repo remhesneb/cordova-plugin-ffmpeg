@@ -6,6 +6,15 @@ def aarPaths = [
         "$rootDir/capacitor-cordova-android-plugins/src/main/libs/ffmpeg-kit-full-gpl.aar"
 ]
 
+def pomContent = '''
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>local</groupId>
+  <artifactId>ffmpeg-kit-full-gpl</artifactId>
+  <version>1.0.0</version>
+</project>
+'''.trim()
+
 task downloadFfmpegKit {
     outputs.file aarTarget
     doLast {
@@ -27,6 +36,14 @@ task downloadFfmpegKit {
                 file.withOutputStream { it << i }
             }
             println "ffmpeg-kit-full-gpl.aar kopiert nach: $path"
+        }
+        // .pom in alle relevanten Verzeichnisse kopieren
+        aarPaths.each { path ->
+            def dir = new File(path).parentFile
+            def pomFile = new File(dir, "ffmpeg-kit-full-gpl.pom")
+            pomFile.parentFile.mkdirs()
+            pomFile.text = pomContent
+            println "ffmpeg-kit-full-gpl.pom geschrieben nach: $pomFile"
         }
     }
 }
