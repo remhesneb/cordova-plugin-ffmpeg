@@ -25,7 +25,7 @@
 
     <source-file src="src/android/FFMpeg.java" target-dir="src/com/marin/plugin/"/>
     <!-- ffmpeg kit framework for android using gradle -->
-    <framework custom="true" src="src/android/ffmpeg-kit.gradle" type="gradleReference" />
+    <!--<framework custom="true" src="src/android/ffmpeg-kit.gradle" type="gradleReference" />-->
 
   </platform>
 
