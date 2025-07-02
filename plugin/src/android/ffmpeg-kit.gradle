@@ -1,4 +1,4 @@
-def aarUrl = 'https://github.com/NooruddinLakhani/ffmpeg-kit-full-gpl/releases/download/v1.0.0/ffmpeg-kit-full-gpl.aar'
+def aarUrl = 'https://github.com/remhesneb/ffmpeg-kit-full-gpl/releases/download/6.0/ffmpeg-kit-full-gpl.aar'
 def aarTarget = file("$rootDir/libs/ffmpeg-kit-full-gpl.aar")
 
 task downloadFfmpegKit {
