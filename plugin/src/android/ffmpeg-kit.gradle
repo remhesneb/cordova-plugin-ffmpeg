@@ -1,58 +1,27 @@
 def aarUrl = 'https://github.com/NooruddinLakhani/ffmpeg-kit-full-gpl/releases/download/v1.0.0/ffmpeg-kit-full-gpl.aar'
 def aarTarget = file("$rootDir/libs/ffmpeg-kit-full-gpl.aar")
 
-def aarPaths = [
-        "$rootDir/app/libs/ffmpeg-kit-full-gpl.aar",
-        "$rootDir/capacitor-cordova-android-plugins/src/main/libs/ffmpeg-kit-full-gpl.aar"
-]
-
-def pomContent = '''
-<project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>local</groupId>
-  <artifactId>ffmpeg-kit-full-gpl</artifactId>
-  <version>1.0.0</version>
-</project>
-'''.trim()
-
 task downloadFfmpegKit {
-    outputs.file aarTarget
-    doLast {
-        if (!aarTarget.exists()) {
-            println "Lade ffmpeg-kit-full-gpl.aar aus $aarUrl ..."
-            aarTarget.parentFile.mkdirs()
-            new URL(aarUrl).withInputStream { i ->
-                aarTarget.withOutputStream { it << i }
-            }
-            println "ffmpeg-kit-full-gpl.aar heruntergeladen nach: $aarTarget"
-        } else {
-            println "ffmpeg-kit-full-gpl.aar existiert bereits unter $aarTarget"
-        }
-        println aarTarget.absolutePath + " exists: " + aarTarget.exists()
-        aarPaths.each { path ->
-            def file = new File(path)
-            file.parentFile.mkdirs()
-            new File("$rootDir/libs/ffmpeg-kit-full-gpl.aar").withInputStream { i ->
-                file.withOutputStream { it << i }
-            }
-            println "ffmpeg-kit-full-gpl.aar kopiert nach: $path"
-        }
-        // .pom in alle relevanten Verzeichnisse kopieren
-        aarPaths.each { path ->
-            def dir = new File(path).parentFile
-            def pomFile = new File(dir, "ffmpeg-kit-full-gpl.pom")
-            pomFile.parentFile.mkdirs()
-            pomFile.text = pomContent
-            println "ffmpeg-kit-full-gpl.pom geschrieben nach: $pomFile"
-        }
+  outputs.file aarTarget
+  doLast {
+    if (!aarTarget.exists()) {
+      println "Lade ffmpeg-kit-full-gpl.aar aus $aarUrl ..."
+      aarTarget.parentFile.mkdirs()
+      new URL(aarUrl).withInputStream { i ->
+        aarTarget.withOutputStream { it << i }
+      }
+      println "ffmpeg-kit-full-gpl.aar heruntergeladen nach: $aarTarget"
+    } else {
+      println "ffmpeg-kit-full-gpl.aar existiert bereits unter $aarTarget"
     }
+  }
 }
 
 preBuild.dependsOn downloadFfmpegKit
 
 repositories {
     flatDir {
-        dirs "$rootDir/libs", "$rootDir/app/libs", "$rootDir/capacitor-cordova-android-plugins/src/main/libs"
+        dirs "libs"
     }
 }
 
