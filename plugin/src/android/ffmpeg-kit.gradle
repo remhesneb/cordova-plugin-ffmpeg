@@ -1,23 +1,28 @@
 def aarUrl = 'https://github.com/remhesneb/ffmpeg-kit-full-gpl/releases/download/6.0/ffmpeg-kit-full-gpl.aar'
-def aarTarget = file("$rootDir/libs/ffmpeg-kit-full-gpl.aar")
+def aarFile = file("$rootDir/libs/ffmpeg-kit-full-gpl.aar")
 
-task downloadFfmpegKit {
-  outputs.file aarTarget
-  doLast {
-    if (!aarTarget.exists()) {
-      println "Lade ffmpeg-kit-full-gpl.aar aus $aarUrl ..."
-      aarTarget.parentFile.mkdirs()
-      new URL(aarUrl).withInputStream { i ->
-        aarTarget.withOutputStream { it << i }
-      }
-      println "ffmpeg-kit-full-gpl.aar heruntergeladen nach: $aarTarget"
-    } else {
-      println "ffmpeg-kit-full-gpl.aar existiert bereits unter $aarTarget"
+
+afterEvaluate {
+    tasks.register("downloadFfmpegKit") {
+        doLast {
+            if (!aarFile.parentFile.exists()) {
+                println "📁 Creating directory: ${aarFile.parentFile.absolutePath}"
+                aarFile.parentFile.mkdirs()
+            }
+            if (!aarFile.exists()) {
+                println "⏬ Downloading AAR from $aarUrl..."
+                new URL(aarUrl).withInputStream { i ->
+                    aarFile.withOutputStream { it << i }
+                }
+                println "✅ AAR downloaded to ${aarFile.absolutePath}"
+            } else {
+                println "ℹ️ AAR already exists at ${aarFile.absolutePath}"
+            }
+        }
     }
-  }
-}
 
-preBuild.dependsOn downloadFfmpegKit
+    preBuild.dependsOn("downloadFfmpegKit")
+}
 
 repositories {
     flatDir {
