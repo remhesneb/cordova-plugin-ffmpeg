@@ -1,4 +1,4 @@
-def aarUrl = 'https://github.com/remhesneb/ffmpeg-kit-full-gpl/releases/download/6.1.4-16kb/ffmpeg-kit-full-gpl.aar'
+def aarUrl = 'https://github.com/remhesneb/ffmpeg-kit-full-gpl/releases/download/6.0-16kb/ffmpeg-kit-full-gpl.aar'
 def aarFile = file("$rootDir/libs/ffmpeg-kit-full-gpl.aar")
 
 afterEvaluate {
